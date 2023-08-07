@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Waste Management</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Food Waste Management</h1>
+
+        <!-- Form 1: Check Food is in Database -->
+        <form id="foodForm">
+            <label for="foodName">Food Name:</label>
+            <input type="text" id="foodName" name="foodName" required>
+            <button type="submit">Check Food</button>
+        </form>
+
+        <!-- Form 2: Add Food with new UID -->
+        <form id="addFoodForm">
+            <h3>Add Food</h3>
+            <label for="foodName">Food Name:</label>
+            <input type="text" id="foodName" name="foodName" required>
+            
+            <label for="quantity">Quantity:</label>
+            <input type="number" id="quantity" name="quantity" required>
+            
+            <label for="expiryDate">Expiry Date:</label>
+            <input type="date" id="expiryDate" name="expiryDate" required>
+            
+            <label for="dateAdded">Date Added:</label>
+            <input type="date" id="dateAdded" name="dateAdded" required>
+    
+            <button type="submit" id = "add-btn">Add Food</button>
+        </form>
+
+        <!-- Form 3: Expire Soon (48 Hours) -->
+
+        <form id="expireSoonForm">
+            <h3>Foods Expiring Soon</h3>
+            <button type="submit">Show Foods Expiring in 24 Hours</button>
+        </form>
+
+        <!-- Form 4: Reduce Food (x) by quantity (y)-->
+        <form id="reduceQuantityForm">
+            <h3>Reduce Quantity</h3>
+            <label for="reduceFoodName">Food Name:</label>
+            <input type="text" id="reduceFoodName" name="reduceFoodName" required>
+            
+            <label for="reduceQuantity">Reduce By:</label>
+            <input type="number" id="reduceQuantity" name="reduceQuantity" required>
+            
+            <button type="submit">Reduce</button>
+        </form>
+
+           <!-- Form 5: Delete instance of food  -->
+        <form id="removeFoodForm">
+            <h3>Remove Food</h3>
+            <label for="removeFoodName">Food Name:</label>
+            <input type="text" id="removeFoodName" name="removeFoodName" required>
+            
+            <button type="submit" id = "del-btn">Remove Food</button>
+        </form>
+
+        <!-- Form 6: Select foods table -->
+
+        <form id="selectFoodForm">
+            <h3>Select Food</h3>
+            <label for="selectFoods">Food Name:</label>
+            <input type="text" id="removeFoodName" name="removeFoodName" required>
+            
+            <button type="submit" id = "ls-btn">Select Foods</button>
+        </form>
+
+
+
+
+        <div id="result"></div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="scripts.js"></script>
+</body>
+</html>

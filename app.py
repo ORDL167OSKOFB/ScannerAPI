@@ -7,10 +7,9 @@ import pyodbc
 app = Flask(__name__)
 
 
-
-
 import pyodbc
 
+# Connect DB 
 
 server = "sqlschema.database.windows.net"
 db = "DatabaseSchema"
@@ -24,42 +23,96 @@ def create_connection():
 print('Database connection successfully established') 
 
 connect = create_connection()
+
+
 @app.route('/')
-def hello_world():
-    return 'Hello, World!'
-
-# As a scanner API, I am going to model the behaviour of this API After a real-life scanner. 
-# That is, only one item can be scanned at a time. Therefore, the parameters passed will be the food name, date added and expiry date. 
-
-@app.route('/add_food', methods=['POST'])
-def add_food(): 
-    food_name = request.json['FoodName']
-    date_added = request.json['DateAdded']
-    expiry_date = request.json['ExpiryDate']
-    cursor = connect.cursor()   
-    cursor.execute("INSERT INTO Foods (name, added, expiry) values (?, ?, ?)", food_name, date_added, expiry_date)
-    return {'status': 'success'}, 200
-
-# def add_new_food():
+def select_data():
     
-    
+    print("Inside Select Function!")
+    cursor = connect.cursor()
+    select_query = "SELECT * FROM Foods;"
+    cursor.execute(select_query)
+    rows = cursor.fetchall()
+
+    for row in rows:
+        print(row)
+
+    connect.commit()
+
+
+def insert_data(food_name, quantity, expiry_date, date_added):
+    try:
+        cursor = connect.cursor()
+
+        insert_query = "INSERT INTO Foods (FoodName, Quantity, ExpiryDate, DateAdded) VALUES (?, ?, ?, ?)"
+        cursor.execute(insert_query, food_name, quantity, expiry_date, date_added)
+        
+        connect.commit()
+        print("Data inserted successfully.")
+    except Exception as e:
+        print("An error occurred:", e)
+        
+
+
+def remove_food(food_name, quantity, expiry_date, date_added):
+    try:
+        cursor = connect.cursor()
+
+        delete_query = "DELETE FROM Foods WHERE FoodName = ? AND Quantity = ? AND ExpiryDate = ? AND DateAdded = ?"
+        cursor.execute(delete_query, food_name, quantity, expiry_date, date_added)
+        
+        connect.commit()
+        print("Remove Called successfully.")
+    except Exception as e:
+        print("An error occurred:", e)
+        
+
+
+# QUERIES
+
+select_data()
+
+# INSERT DATA 
+
+# Call the function to insert data
+insert_data("Apple", 5, '2023-12-30', '2023-07-18')
+insert_data("Banana", 5, '2023-12-30', '2023-07-18')
+
+# REMOVE DATA- TEST
+   
+print("before remove Select")
+select_data()
+remove_food("Apple", 5, '2023-12-30', '2023-07-18')
+
+print("after remove Select")
+select_data()
+
+
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
+        
+if __name__ == '__main__':
+    app.run(debug=True)
 
-    
 
-# @app.route('/remove_food', methods=['POST'])
-# def remove_food():
-#     food_name = request.json['FoodName']
-#     cursor = connect.cursor()
-#     cursor.execute("SELECT TOP 1 id FROM Foods WHERE name = ?", food_name)
-#     return {'status': 'success'}, 200
-# if __name__ == '__main__':
-#     app.run(debug=True)
-    
-# def remove_multiple():
-#     food_name = request.json['FoodName']
-#     cursor = connect.cursor()
-#     for i in range(0, len(food_name)):
-#         cursor.execute("SELECT id FROM Foods WHERE name = ?", food_name)
-#     return {'status': 'success'}, 200
+
+
+
+# # QUERIES
+
+# select_data()
+
+# # INSERT DATA 
+
+# # Call the function to insert data
+# insert_data("Apple", 5, '2023-12-30', '2023-07-18')
+# insert_data("Banana", 5, '2023-12-30', '2023-07-18')
+
+# # REMOVE DATA- TEST
+   
+# print("before remove Select")
+# select_data()
+# remove_food("Apple", 5, '2023-12-30', '2023-07-18')
+
+# print("after remove Select")
+# select_data()
