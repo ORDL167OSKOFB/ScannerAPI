@@ -3,7 +3,11 @@ from flask import request
 
 
 import pyodbc
+from flask_cors import CORS
+
 app = Flask(__name__)
+CORS(app)
+
 
 # Connect DB 
 
