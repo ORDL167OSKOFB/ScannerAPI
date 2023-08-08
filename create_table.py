@@ -2,7 +2,12 @@ import os
 import pyodbc
 from flask import Flask, jsonify, request
 from Select_food import select_data
+
+
+from flask_cors import CORS
+
 app = Flask(__name__)
+CORS(app)
 
 import configparser
 
