@@ -6,6 +6,11 @@ from flask import request
 import pyodbc
 app = Flask(__name__)
 
+# Comment CORS out below for other implementations of the app
+from flask_cors import CORS
+
+CORS(app, resources={r"/*": {"origins": "https://foodwasteappfrontend.azurewebsites.net"}})
+
 
 import pyodbc
 
