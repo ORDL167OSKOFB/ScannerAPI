@@ -4,7 +4,7 @@ from flask import Flask, jsonify, request, json
 from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "https://foodwasteappfrontend.azurewebsites.net"}})
+CORS(app, resources={r"/*": {"origins": "https://40268037flaskfrontend.azurewebsites.net"}})
 import configparser
 
 def get_connection_string():

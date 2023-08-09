@@ -6,7 +6,7 @@ import pyodbc
 from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "https://foodwasteappfrontend.azurewebsites.net"}})
+CORS(app, resources={r"/*": {"origins": "https://40268037flaskfrontend.azurewebsites.net"}})
 
 
 def get_connection_string():
