@@ -45,8 +45,8 @@ def check_table_exists():
     return result is not None
 
 
-@app.route('/init-food', methods=['POST'])
 def init_food():
+    message = ""
     if not check_table_exists():
         create_table()
         message = "New Food Table has been created."
@@ -54,7 +54,10 @@ def init_food():
         message = "Food Table already exists."
     
     connection.close()
-    return jsonify({'message': message}), 200
+    return message
+
+db_init_result = init_food()
+print(db_init_result)
 
 
 def create_table():
@@ -80,11 +83,7 @@ def create_table():
         print("An error occurred:", e)
 
 
-init_food()
-
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
         
-if __name__ == '__main__': 
-    app.run(debug=True)
