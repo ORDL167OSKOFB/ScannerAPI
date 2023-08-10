@@ -32,6 +32,7 @@ def get_connection_string():
 def create_connection():
     return pyodbc.connect(get_connection_string())
  
+#  Redeployed to Azure
 connection = create_connection()
 
 def check_table_exists():
