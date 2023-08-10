@@ -63,3 +63,5 @@ def create_table():
         print("An error occurred:", e)
 
 init_food()
+
+# redeployed to azure
